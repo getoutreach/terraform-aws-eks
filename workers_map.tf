@@ -429,8 +429,8 @@ resource "aws_launch_template" "workers_map" {
       lookup(
         each.value,
         "additional_security_group_ids",
+        null) != null ? each.value["additional_security_group_ids"] :
         local.workers_group_defaults["additional_security_group_ids"],
-      ),
     ])
   }
 
