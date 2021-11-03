@@ -164,8 +164,8 @@ resource "aws_autoscaling_group" "workers_map" {
   suspended_processes = lookup(
     each.value,
     "suspended_processes",
-    local.workers_group_defaults["suspended_processes"]
-  )
+    null) != null ? each.value["suspended_processes"] : local.workers_group_defaults["suspended_processes"]
+
   enabled_metrics = lookup(
     each.value,
     "enabled_metrics",
